@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maria Old Age Home — Evander</title>
+<meta name="description" content="Maria Old Age Home in Evander — a warm, caring home for the elderly. Visit us, call us, or drop by 43 Toulouse Street.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Work+Sans:wght@400;500;600;700&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FBF2E3;
+    --paper:#FFFDF7;
+    --ink:#33402E;
+    --ink-soft:#5B6653;
+    --marigold:#E7A73C;
+    --marigold-deep:#C97F1F;
+    --brick:#C1483C;
+    --sage:#6F8F5E;
+    --sage-deep:#4C6B3F;
+    --sky:#4A7396;
+    --line: rgba(51,64,46,0.14);
+    --shadow: 0 14px 34px rgba(51,40,20,0.16);
+    --shadow-soft: 0 6px 18px rgba(51,40,20,0.10);
+    --radius: 14px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;}
+  h1,h2,h3,h4{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    margin:0 0 .4em 0;
+    color:var(--sage-deep);
+    letter-spacing:-0.01em;
+  }
+  .hand{
+    font-family:'Caveat', cursive;
+    font-weight:600;
+  }
+  .wrap{
+    max-width:1120px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:'Caveat', cursive;
+    font-size:1.55rem;
+    color:var(--brick);
+    margin-bottom:6px;
+    transform:rotate(-1.2deg);
+  }
+  .eyebrow svg{width:20px;height:20px;flex:none;}
+
+  /* ---------- NAV ---------- */
+  header.site-nav{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(251,242,227,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:2px solid var(--line);
+  }
+  .nav-inner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:14px 28px;
+    max-width:1120px;
+    margin:0 auto;
+  }
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:1.32rem;
+    color:var(--sage-deep);
+    text-decoration:none;
+  }
+  .brand-mark{
+    width:38px;height:38px;flex:none;
+    border-radius:50%;
+    background:var(--marigold);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow: inset 0 -3px 0 rgba(0,0,0,0.08);
+  }
+  .brand-mark svg{width:21px;height:21px;}
+  nav.links{
+    display:flex;
+    gap:28px;
+    font-size:.98rem;
+    font-weight:500;
+  }
+  nav.links a{
+    text-decoration:none;
+    color:var(--ink-soft);
+    position:relative;
+    padding-bottom:3px;
+  }
+  nav.links a:hover{color:var(--brick);}
+  .nav-call{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    background:var(--sage-deep);
+    color:#fff;
+    padding:9px 18px;
+    border-radius:999px;
+    text-decoration:none;
+    font-weight:600;
+    font-size:.92rem;
+    white-space:nowrap;
+    box-shadow:var(--shadow-soft);
+    transition:transform .15s ease, background .15s ease;
+  }
+  .nav-call:hover{background:var(--brick); transform:translateY(-1px);}
+  .burger{display:none;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:86vh;
+    display:flex;
+    align-items:flex-end;
+    overflow:hidden;
+  }
+  .hero img{
+    position:absolute;
+    inset:0;
+    width:100%;height:100%;
+    object-fit:cover;
+    object-position:center 30%;
+  }
+  .hero::after{
+    content:"";
+    position:absolute;inset:0;
+    background:linear-gradient(180deg, rgba(46,50,30,0.05) 0%, rgba(38,40,22,0.30) 55%, rgba(30,32,16,0.82) 100%);
+  }
+  .hero-content{
+    position:relative;
+    z-index:2;
+    color:#FFFCF4;
+    padding:70px 28px 56px;
+    max-width:1120px;
+    margin:0 auto;
+    width:100%;
+  }
+  .hero-tag{
+    font-family:'Caveat', cursive;
+    font-size:1.7rem;
+    color:var(--marigold);
+    transform:rotate(-2deg);
+    display:inline-block;
+    margin-bottom:8px;
+  }
+  .hero h1{
+    color:#FFFCF4;
+    font-size:clamp(2.4rem, 5.4vw, 4rem);
+    line-height:1.05;
+    max-width:760px;
+    margin-bottom:.3em;
+  }
+  .hero p.lead{
+    max-width:560px;
+    font-size:1.14rem;
+    color:#F3ECDC;
+    margin-bottom:1.7em;
+  }
+  .hero-actions{
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+    padding:13px 26px;
+    border-radius:999px;
+    font-weight:600;
+    text-decoration:none;
+    font-size:.98rem;
+    border:2px solid transparent;
+    transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+  }
+  .btn-primary{
+    background:var(--marigold);
+    color:#3A2A0E;
+    box-shadow:var(--shadow);
+  }
+  .btn-primary:hover{transform:translateY(-2px); background:#F0B054;}
+  .btn-ghost{
+    border-color:rgba(255,252,244,0.55);
+    color:#FFFCF4;
+  }
+  .btn-ghost:hover{background:rgba(255,252,244,0.14); transform:translateY(-2px);}
+
+  /* wavy divider */
+  .wave{
+    display:block;
+    width:100%;
+    height:46px;
+    margin-top:-2px;
+  }
+
+  /* ---------- SECTION generic ---------- */
+  section{ padding:88px 0; position:relative;}
+  .section-head{
+    max-width:640px;
+    margin-bottom:44px;
+  }
+  .section-head.center{margin-left:auto;margin-right:auto;text-align:center;}
+  .section-head h2{font-size:clamp(1.8rem,3.4vw,2.5rem);}
+  .section-head p{color:var(--ink-soft); font-size:1.06rem;}
+
+  /* ---------- WELCOME ---------- */
+  .welcome{
+    background:var(--paper);
+  }
+  .welcome-grid{
+    display:grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap:56px;
+    align-items:center;
+  }
+  .welcome-text p{margin:0 0 1.1em 0; color:var(--ink-soft);}
+  .welcome-text p:first-of-type{color:var(--ink); font-size:1.12rem;}
+  .signature-line{
+    font-family:'Caveat', cursive;
+    font-size:1.5rem;
+    color:var(--sage-deep);
+    margin-top:18px;
+  }
+  .polaroid{
+    background:#fff;
+    padding:14px 14px 42px 14px;
+    box-shadow:var(--shadow);
+    border-radius:4px;
+    transform:rotate(3.5deg);
+    position:relative;
+    max-width:340px;
+    margin:0 auto;
+  }
+  .polaroid img{border-radius:2px;}
+  .polaroid .cap{
+    position:absolute;
+    bottom:8px;left:0;right:0;
+    text-align:center;
+    font-family:'Caveat', cursive;
+    font-size:1.32rem;
+    color:var(--ink-soft);
+  }
+  .tape{
+    position:absolute;
+    width:78px;height:26px;
+    background:rgba(231,167,60,0.55);
+    top:-12px;left:50%;
+    transform:translateX(-50%) rotate(-3deg);
+    box-shadow:0 2px 4px rgba(0,0,0,0.08);
+  }
+
+  /* ---------- SCRAPBOOK / DAY IN THE LIFE ---------- */
+  .scrapbook{
+    background:
+      radial-gradient(circle at 18% 22%, rgba(111,143,94,0.10) 0, transparent 40%),
+      radial-gradient(circle at 82% 78%, rgba(193,72,60,0.08) 0, transparent 42%),
+      var(--cream);
+  }
+  .board{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:38px 30px;
+    margin-top:20px;
+  }
+  .card-photo{
+    background:#fff;
+    padding:12px 12px 46px;
+    border-radius:4px;
+    box-shadow:var(--shadow-soft);
+    transition:transform .2s ease, box-shadow .2s ease;
+    position:relative;
+  }
+  .card-photo:hover{box-shadow:var(--shadow); z-index:5;}
+  .board .card-photo:nth-child(1){transform:rotate(-2.4deg);}
+  .board .card-photo:nth-child(2){transform:rotate(1.6deg); margin-top:26px;}
+  .board .card-photo:nth-child(3){transform:rotate(-1deg);}
+  .board .card-photo:hover{transform:rotate(0deg) scale(1.02);}
+  .card-photo img{border-radius:2px; aspect-ratio:4/5; object-fit:cover;}
+  .card-photo .cap{
+    position:absolute; bottom:12px; left:0; right:0;
+    text-align:center;
+    font-family:'Caveat', cursive;
+    font-size:1.28rem;
+    color:var(--ink-soft);
+    padding:0 12px;
+  }
+  .pin{
+    position:absolute;
+    top:-9px;left:50%;
+    transform:translateX(-50%);
+    width:16px;height:16px;
+    border-radius:50%;
+    background:var(--brick);
+    box-shadow:0 2px 3px rgba(0,0,0,0.3), inset 0 -2px 2px rgba(0,0,0,0.25);
+  }
+
+  /* ---------- FRIENDS / PARTNERS ---------- */
+  .friends{background:var(--paper);}
+  .friends-grid{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap:34px;
+    margin-top:10px;
+  }
+  .friend-card{
+    background:var(--cream);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    overflow:hidden;
+    box-shadow:var(--shadow-soft);
+  }
+  .friend-card img{aspect-ratio:16/11; object-fit:cover; object-position: top;}
+  .friend-copy{padding:22px 24px 26px;}
+  .friend-copy h3{font-size:1.22rem; margin-bottom:.3em;}
+  .friend-copy p{color:var(--ink-soft); font-size:.98rem; margin:0;}
+  .thanks-strip{
+    margin-top:38px;
+    background:var(--sage-deep);
+    color:#F4EFDF;
+    border-radius:var(--radius);
+    padding:28px 32px;
+    display:flex;
+    align-items:center;
+    gap:22px;
+    flex-wrap:wrap;
+  }
+  .thanks-strip .hand{font-size:1.9rem; color:var(--marigold); flex:none;}
+  .thanks-strip p{margin:0; color:#EFE9D6; font-size:.98rem;}
+
+  /* ---------- SERVICES ---------- */
+  .services{background:var(--cream);}
+  .service-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:24px;
+  }
+  .service-card{
+    background:var(--paper);
+    border-radius:var(--radius);
+    padding:28px 24px;
+    border:1px solid var(--line);
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .service-card:hover{transform:translateY(-4px); box-shadow:var(--shadow-soft);}
+  .service-icon{
+    width:46px;height:46px;
+    border-radius:12px;
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:16px;
+  }
+  .service-icon svg{width:24px;height:24px;}
+  .service-card h3{font-size:1.08rem; margin-bottom:.3em;}
+  .service-card p{color:var(--ink-soft); font-size:.94rem; margin:0;}
+
+  .ic-1{background:#F4DCB6;} .ic-1 svg{stroke:var(--marigold-deep);}
+  .ic-2{background:#F1CFC9;} .ic-2 svg{stroke:var(--brick);}
+  .ic-3{background:#DCE7D3;} .ic-3 svg{stroke:var(--sage-deep);}
+  .ic-4{background:#D6E2EA;} .ic-4 svg{stroke:var(--sky);}
+  .ic-5{background:#F4DCB6;} .ic-5 svg{stroke:var(--marigold-deep);}
+  .ic-6{background:#DCE7D3;} .ic-6 svg{stroke:var(--sage-deep);}
+
+  /* ---------- PATH DIVIDER (cones nod) ---------- */
+  .path-divider{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:22px;
+    padding:10px 0 6px;
+    flex-wrap:wrap;
+  }
+  .cone{width:16px;height:20px;}
+
+  /* ---------- VISIT / CONTACT ---------- */
+  .visit{
+    background: var(--sage-deep);
+    color:#F5F0DF;
+    position:relative;
+    overflow:hidden;
+  }
+  .visit::before{
+    content:"";
+    position:absolute;
+    right:-120px; top:-120px;
+    width:340px; height:340px;
+    border-radius:50%;
+    background:rgba(231,167,60,0.14);
+  }
+  .visit::after{
+    content:"";
+    position:absolute;
+    left:-100px; bottom:-140px;
+    width:300px; height:300px;
+    border-radius:50%;
+    background:rgba(193,72,60,0.10);
+  }
+  .visit-grid{
+    position:relative;
+    z-index:2;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:50px;
+    align-items:start;
+  }
+  .visit h2{color:#FFFCF2;}
+  .visit .section-head p{color:#E5E0CA;}
+  .contact-card{
+    background:rgba(255,253,247,0.08);
+    border:1px solid rgba(255,253,247,0.22);
+    border-radius:var(--radius);
+    padding:30px 30px 26px;
+    backdrop-filter:blur(2px);
+  }
+  .contact-row{
+    display:flex;
+    gap:16px;
+    align-items:flex-start;
+    padding:14px 0;
+    border-bottom:1px dashed rgba(245,240,223,0.25);
+  }
+  .contact-row:last-child{border-bottom:none;}
+  .contact-row svg{width:21px;height:21px; flex:none; margin-top:2px; stroke:var(--marigold);}
+  .contact-row .label{font-size:.78rem; text-transform:uppercase; letter-spacing:.09em; color:#C9C3A9; margin-bottom:2px;}
+  .contact-row a, .contact-row span.val{
+    font-weight:600; color:#FFFCF2; text-decoration:none; font-size:1.02rem;
+  }
+  .contact-row a:hover{color:var(--marigold);}
+  .visit-note{
+    font-family:'Caveat', cursive;
+    font-size:1.4rem;
+    color:var(--marigold);
+    margin-top:22px;
+    transform:rotate(-1deg);
+  }
+  .hours-card{
+    margin-top:26px;
+    background:rgba(255,253,247,0.06);
+    border:1px solid rgba(255,253,247,0.18);
+    border-radius:var(--radius);
+    padding:22px 26px;
+  }
+  .hours-card h4{color:#FFFCF2; font-size:1rem; margin-bottom:10px;}
+  .hours-row{display:flex; justify-content:space-between; font-size:.94rem; padding:5px 0; color:#E5E0CA;}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:#26301F;
+    color:#C9C3A9;
+    padding:44px 0 22px;
+    font-size:.92rem;
+  }
+  .footer-grid{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    flex-wrap:wrap;
+    gap:24px;
+    padding-bottom:26px;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+  }
+  .footer-brand{
+    display:flex;align-items:center;gap:10px;
+    font-family:'Fraunces', serif;
+    color:#F5F0DF;
+    font-size:1.14rem;
+    font-weight:600;
+  }
+  .footer-brand .brand-mark{width:32px;height:32px;}
+  .footer-brand .brand-mark svg{width:17px;height:17px;}
+  .footer-links{display:flex; gap:26px; flex-wrap:wrap;}
+  .footer-links a{text-decoration:none; color:#C9C3A9;}
+  .footer-links a:hover{color:var(--marigold);}
+  .footer-bottom{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding-top:20px;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .made-by{
+    font-family:'Caveat', cursive;
+    font-size:1.28rem;
+    color:var(--marigold);
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 880px){
+    nav.links{display:none;}
+    .welcome-grid{grid-template-columns:1fr;}
+    .welcome-text{order:2;}
+    .polaroid{order:1; margin-bottom:10px;}
+    .board{grid-template-columns:1fr 1fr;}
+    .friends-grid{grid-template-columns:1fr;}
+    .service-grid{grid-template-columns:1fr 1fr;}
+    .visit-grid{grid-template-columns:1fr;}
+  }
+  @media (max-width: 560px){
+    .board{grid-template-columns:1fr;}
+    .board .card-photo{margin-top:0 !important; transform:rotate(-1deg) !important;}
+    .service-grid{grid-template-columns:1fr;}
+    .hero{min-height:92vh;}
+    section{padding:64px 0;}
+    .nav-call span.txt{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="nav-inner">
+    <a href="#top" class="brand">
+      <span class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 20.5s-7.5-4.6-7.5-10A4.5 4.5 0 0 1 12 7.2 4.5 4.5 0 0 1 19.5 10.5c0 5.4-7.5 10-7.5 10z" fill="#C1483C" stroke="none"/></svg>
+      </span>
+      Maria Old Age Home
+    </a>
+    <nav class="links">
+      <a href="#welcome">Our Story</a>
+      <a href="#daily-life">A Day With Us</a>
+      <a href="#friends">Our Friends</a>
+      <a href="#services">Care We Give</a>
+      <a href="#visit">Visit Us</a>
+    </nav>
+    <a class="nav-call" href="tel:0176321214">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      <span class="txt">017 632 1214</span>
+    </a>
+  </div>
+</header>
+
+<div id="top"></div>
+<section class="hero">
+  <img src="assets/old19.jpg" alt="Residents enjoying the garden at Maria Old Age Home">
+  <div class="hero-content">
+    <span class="hero-tag">welcome home, Evander</span>
+    <h1>A home grown with love, right here in Evander</h1>
+    <p class="lead">Maria Old Age Home is a warm, family-run home where our elderly are cared for with dignity, kept close to community, and never short of a friendly hand on the shoulder.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#visit">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Come visit us
+      </a>
+      <a class="btn btn-ghost" href="#daily-life">See a day with us</a>
+    </div>
+  </div>
+</section>
+
+<svg class="wave" viewBox="0 0 1200 46" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0,20 C150,50 350,0 600,20 C850,40 1050,0 1200,20 L1200,46 L0,46 Z" fill="#FFFDF7"></path>
+</svg>
+
+<section class="welcome" id="welcome">
+  <div class="wrap welcome-grid">
+    <div class="welcome-text">
+      <span class="eyebrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/></svg>
+        our story
+      </span>
+      <h2>Family first. Always has been.</h2>
+      <p>Tucked away on Toulouse Street, Maria Old Age Home has become a second family for the elders who live here — and for the families who trust us with them. We believe growing older should never mean growing lonely.</p>
+      <p>Our days are unhurried. There's tea in the lounge, sunshine on the lawn, hymns on a Sunday, and always someone nearby to hold a hand, share a story, or simply sit a while. Whether a resident needs a wheelchair, a walking stick, or just good company, our caregivers are there — patient, present, and proud of the work they do.</p>
+      <p>We're a small home with a big heart, and we'd love for you to come see it for yourself.</p>
+      <div class="signature-line">— with love, the Maria Old Age Home family</div>
+    </div>
+    <div class="polaroid">
+      <span class="tape"></span>
+      <img src="assets/old1.jpg" alt="A caregiver checking in with residents in the garden">
+      <span class="cap">checking in on everyone ♥</span>
+    </div>
+  </div>
+</section>
+
+<section class="scrapbook" id="daily-life">
+  <div class="wrap">
+    <div class="section-head center" style="margin-left:auto;margin-right:auto;">
+      <span class="eyebrow" style="justify-content:center;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        a day with us
+      </span>
+      <h2>Sunshine, games and good company</h2>
+      <p>A little peek into our everyday — from field-day fun on the lawn to tea and biscuits in the lounge.</p>
+    </div>
+    <div class="board">
+      <div class="card-photo">
+        <span class="pin"></span>
+        <img src="assets/gamesold.jpg" alt="Colourful cones set out for a garden games day">
+        <span class="cap">field day on the lawn!</span>
+      </div>
+      <div class="card-photo">
+        <span class="pin"></span>
+        <img src="assets/old4.jpg" alt="Residents enjoying tea and snacks together in the lounge">
+        <span class="cap">tea time chats</span>
+      </div>
+      <div class="card-photo">
+        <span class="pin"></span>
+        <img src="assets/old19.jpg" alt="Residents relaxing together under the trees in the garden">
+        <span class="cap">afternoons under the trees</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="friends" id="friends">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        our friends
+      </span>
+      <h2>Held up by a caring community</h2>
+      <p>We are endlessly grateful to the local businesses and organisations who visit, donate and spend time with our residents throughout the year.</p>
+    </div>
+    <div class="friends-grid">
+      <div class="friend-card">
+        <img src="assets/old6.jpg" alt="Air Liquide team visiting with blankets and groceries for residents">
+        <div class="friend-copy">
+          <h3>Air Liquide's Mandela Day visit</h3>
+          <p>The Air Liquide team spent the day with us, handing out warm blankets and groceries to keep our residents cosy through winter.</p>
+        </div>
+      </div>
+      <div class="friend-card">
+        <img src="assets/old8.jpg" alt="Teksa Alarms team with residents outdoors during a donation day">
+        <div class="friend-copy">
+          <h3>Teksa Alarms give-back day</h3>
+          <p>Teksa Alarms — Service to People — joined us on the lawn for an afternoon of gifts, laughter and good conversation.</p>
+        </div>
+      </div>
+    </div>
+    <div class="thanks-strip">
+      <span class="hand">thank you ♥</span>
+      <p>To every donor, volunteer and visitor: your blankets, groceries and time mean more to our residents than words can say. If your organisation would like to spend a day with us, we'd love to have you.</p>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="eyebrow" style="justify-content:center;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        the care we give
+      </span>
+      <h2>Everything a home should be</h2>
+    </div>
+    <div class="service-grid">
+      <div class="service-card">
+        <div class="service-icon ic-1"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 21C12 21 4 15.5 4 9.5A4.5 4.5 0 0 1 12 6.5a4.5 4.5 0 0 1 8 3C20 15.5 12 21 12 21z"/></svg></div>
+        <h3>Round-the-clock care</h3>
+        <p>Trained caregivers are on hand day and night, for anything from medication to a comforting chat.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon ic-2"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M3 2v20"/><path d="M3 7h6l-2-5"/><path d="M11 22V2h2c3 0 5 2 5 5s-2 5-5 5"/></svg></div>
+        <h3>Home-cooked meals</h3>
+        <p>Three warm, wholesome meals a day, cooked fresh and shared together around the table.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon ic-3"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 2v4"/><path d="M12 18v4"/><circle cx="12" cy="12" r="6"/></svg></div>
+        <h3>Garden & activities</h3>
+        <p>Sunny lawns, games days and group activities that keep bodies moving and spirits high.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon ic-4"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="5" r="2"/><path d="M9 22V13l-2 3-3-1 3-6 4-2 4 2 3 6-3 1-2-3v9"/></svg></div>
+        <h3>Wheelchair-friendly grounds</h3>
+        <p>Level paths and wide-open lawns mean every resident can move freely, indoors and out.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon ic-5"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg></div>
+        <h3>Family visits, always welcome</h3>
+        <p>Our doors are open. Come for tea, a birthday, or just an ordinary Tuesday afternoon.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon ic-6"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+        <h3>Community days</h3>
+        <p>Regular visits from local businesses and volunteers bring fresh faces and full hearts.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="path-divider" aria-hidden="true">
+    <svg class="cone" viewBox="0 0 24 30"><polygon points="12,0 20,26 4,26" fill="#E7A73C"/><rect x="2" y="26" width="20" height="4" rx="1" fill="#C97F1F"/></svg>
+    <svg class="cone" viewBox="0 0 24 30"><polygon points="12,0 20,26 4,26" fill="#6F8F5E"/><rect x="2" y="26" width="20" height="4" rx="1" fill="#4C6B3F"/></svg>
+    <svg class="cone" viewBox="0 0 24 30"><polygon points="12,0 20,26 4,26" fill="#4A7396"/><rect x="2" y="26" width="20" height="4" rx="1" fill="#385a75"/></svg>
+    <svg class="cone" viewBox="0 0 24 30"><polygon points="12,0 20,26 4,26" fill="#C1483C"/><rect x="2" y="26" width="20" height="4" rx="1" fill="#9a352b"/></svg>
+  </div>
+</div>
+
+<section class="visit" id="visit">
+  <div class="wrap visit-grid">
+    <div>
+      <span class="eyebrow" style="color:var(--marigold);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        find us
+      </span>
+      <div class="section-head">
+        <h2>Come see us in Evander</h2>
+        <p>Pop in for a visit, give us a call, or send through an email — we're always happy to hear from you.</p>
+      </div>
+      <p class="visit-note">the kettle is always on ♥</p>
+      <div class="hours-card">
+        <h4>Visiting hours</h4>
+        <div class="hours-row"><span>Monday – Friday</span><span>08:00 – 17:00</span></div>
+        <div class="hours-row"><span>Saturday</span><span>09:00 – 15:00</span></div>
+        <div class="hours-row"><span>Sunday</span><span>By arrangement</span></div>
+      </div>
+    </div>
+
+    <div class="contact-card">
+      <div class="contact-row">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <div>
+          <div class="label">Address</div>
+          <span class="val">43 Toulouse Street, Evander, 2280</span>
+        </div>
+      </div>
+      <div class="contact-row">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <div>
+          <div class="label">Telephone</div>
+          <a href="tel:0176321214">017 632 1214</a>
+        </div>
+      </div>
+      <div class="contact-row">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6"/></svg>
+        <div>
+          <div class="label">Cellphone</div>
+          <a href="tel:0715931929">071 593 1929</a>
+        </div>
+      </div>
+      <div class="contact-row">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z" opacity="0"/><path d="M3 8l9 6 9-6"/><rect x="3" y="4" width="18" height="16" rx="2"/></svg>
+        <div>
+          <div class="label">Email</div>
+          <a href="mailto:mariaoldagehome@gmail.com">mariaoldagehome@gmail.com</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="brand-mark">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12 20.5s-7.5-4.6-7.5-10A4.5 4.5 0 0 1 12 7.2 4.5 4.5 0 0 1 19.5 10.5c0 5.4-7.5 10-7.5 10z" fill="#E7A73C" stroke="none"/></svg>
+        </span>
+        Maria Old Age Home
+      </div>
+      <div class="footer-links">
+        <a href="#welcome">Our Story</a>
+        <a href="#daily-life">A Day With Us</a>
+        <a href="#friends">Our Friends</a>
+        <a href="#services">Care We Give</a>
+        <a href="#visit">Visit Us</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>43 Toulouse Street, Evander, 2280 · 017 632 1214 · mariaoldagehome@gmail.com</span>
+      <span class="made-by">Made By ZiezGeek</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
