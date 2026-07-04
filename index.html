@@ -592,34 +592,53 @@
     color:var(--marigold);
   }
 
-  /* ---------- VOLUNTEER FORM ---------- */
-  .volunteer{background:var(--paper);}
-  .volunteer-wrap{
-    display:grid;
-    grid-template-columns: 0.85fr 1.15fr;
-    gap:48px;
-    align-items:flex-start;
+  /* ---------- VOLUNTEER MODAL ---------- */
+  .modal-overlay{
+    position:fixed; inset:0;
+    background:rgba(30,32,16,0.48);
+    opacity:0; pointer-events:none;
+    transition:opacity .25s ease;
+    z-index:120;
   }
-  .volunteer-copy p{color:var(--ink-soft);}
-  .volunteer-points{list-style:none; padding:0; margin:22px 0 0;}
-  .volunteer-points li{
-    display:flex; gap:10px; align-items:flex-start;
-    margin-bottom:14px; font-size:.98rem; color:var(--ink);
-  }
-  .volunteer-points svg{width:19px;height:19px; flex:none; margin-top:2px; stroke:var(--sage-deep);}
-  .form-card{
-    background:var(--cream);
-    border:1px solid var(--line);
+  .modal-overlay.open{opacity:1; pointer-events:auto;}
+  .modal-panel{
+    position:fixed;
+    top:50%; left:50%;
+    transform:translate(-50%,-46%);
+    width:640px; max-width:92vw;
+    max-height:88vh;
+    overflow-y:auto;
+    background:var(--paper);
     border-radius:var(--radius);
-    padding:30px;
-    box-shadow:var(--shadow-soft);
+    box-shadow:var(--shadow);
+    z-index:121;
+    padding:34px 34px 30px;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .25s ease, transform .25s ease;
   }
+  .modal-panel.open{opacity:1; pointer-events:auto; transform:translate(-50%,-50%);}
+  .modal-close{
+    position:absolute;
+    top:16px; right:16px;
+    background:none; border:none;
+    cursor:pointer;
+    color:var(--ink-soft);
+    padding:6px;
+    line-height:0;
+    border-radius:50%;
+    transition:background .15s ease;
+  }
+  .modal-close:hover{background:var(--cream); color:var(--brick);}
+  .modal-close svg{width:22px;height:22px;}
+  .modal-panel h2{font-size:1.5rem; margin-top:4px;}
+  .modal-intro{color:var(--ink-soft); font-size:.98rem; margin-bottom:24px;}
   .form-letterhead{
     display:flex;
     align-items:center;
     gap:12px;
-    margin-bottom:22px;
-    padding-bottom:18px;
+    margin-bottom:18px;
+    padding-bottom:16px;
     border-bottom:1px dashed var(--line);
   }
   .form-letterhead img{
@@ -688,9 +707,9 @@
   .form-status.show{display:block;}
   .form-status.ok{background:#DCE7D3; color:var(--sage-deep);}
 
+
   /* ---------- RESPONSIVE ---------- */
   @media (max-width: 880px){
-    .volunteer-wrap{grid-template-columns:1fr;}
     .form-grid{grid-template-columns:1fr;}
     .welcome-grid{grid-template-columns:1fr;}
     .welcome-text{order:2;}
@@ -707,6 +726,7 @@
     .hero{min-height:92vh;}
     section{padding:64px 0;}
     .nav-call span.txt{display:none;}
+    .modal-panel{padding:26px 20px 24px;}
   }
 </style>
 </head>
@@ -761,7 +781,7 @@
       <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
       Care We Give
     </a>
-    <a href="#volunteer" onclick="closeDrawer()">
+    <a href="#" onclick="closeDrawer(); openVolunteer(); return false;">
       <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
       Volunteer
     </a>
@@ -925,110 +945,86 @@
   </div>
 </section>
 
-<section class="volunteer" id="volunteer">
-  <div class="wrap volunteer-wrap">
-    <div class="volunteer-copy">
-      <span class="eyebrow">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-        give your time
-      </span>
-      <h2>Become a volunteer</h2>
-      <p>Some of our residents' happiest afternoons come from a simple visit — a game of cards, a helping hand in the garden, or just someone new to talk to. If you have an hour or a whole Saturday to spare, we'd love to have you.</p>
-      <ul class="volunteer-points">
-        <li>
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
-          No experience needed — just a kind heart
-        </li>
-        <li>
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
-          Choose a department that suits you: care, kitchen, garden, admin or activities
-        </li>
-        <li>
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
-          Once-off event helpers and regular weekly volunteers both welcome
-        </li>
-      </ul>
-      <p class="signature-line">— fill in the form and we'll be in touch ♥</p>
-    </div>
+<div class="modal-overlay" id="volunteerOverlay" onclick="closeVolunteer()"></div>
+<div class="modal-panel" id="volunteerModal" role="dialog" aria-modal="true" aria-labelledby="volunteerTitle" aria-hidden="true">
+  <button class="modal-close" onclick="closeVolunteer()" aria-label="Close volunteer form">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
 
-    <div class="form-card">
-      <div class="form-letterhead">
-        <img src="assets/logo.jpg" alt="Maria Old Age Home logo">
-        <div>Volunteer Application
-          <span>Maria Old Age Home · Evander</span>
-        </div>
-      </div>
-
-      <form id="volunteerForm">
-        <div class="form-grid">
-          <div class="field">
-            <label for="v-name">Name <span class="req">*</span></label>
-            <input type="text" id="v-name" name="name" required placeholder="First name">
-          </div>
-          <div class="field">
-            <label for="v-surname">Surname <span class="req">*</span></label>
-            <input type="text" id="v-surname" name="surname" required placeholder="Surname">
-          </div>
-          <div class="field">
-            <label for="v-id">I.D Number <span class="req">*</span></label>
-            <input type="text" id="v-id" name="idnumber" required placeholder="13-digit I.D number" inputmode="numeric" maxlength="13">
-          </div>
-          <div class="field">
-            <label for="v-cell">Cell <span class="req">*</span></label>
-            <input type="tel" id="v-cell" name="cell" required placeholder="071 234 5678">
-          </div>
-          <div class="field full">
-            <label for="v-email">Email <span class="req">*</span></label>
-            <input type="email" id="v-email" name="email" required placeholder="you@example.com">
-          </div>
-          <div class="field">
-            <label for="v-dept">Department of interest <span class="req">*</span></label>
-            <select id="v-dept" name="department" required>
-              <option value="" disabled selected>Choose a department</option>
-              <option>Care & Companionship</option>
-              <option>Kitchen & Meals</option>
-              <option>Garden & Maintenance</option>
-              <option>Activities & Games</option>
-              <option>Admin & Fundraising</option>
-              <option>Other</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="v-avail">Availability</label>
-            <select id="v-avail" name="availability">
-              <option value="" disabled selected>How often can you help?</option>
-              <option>Once-off event</option>
-              <option>Weekends only</option>
-              <option>Weekly</option>
-              <option>Happy to be flexible</option>
-            </select>
-          </div>
-          <div class="field full">
-            <label for="v-message">Tell us a bit more</label>
-            <textarea id="v-message" name="message" placeholder="Which department would you like to volunteer in, and anything else you'd like us to know..."></textarea>
-            <span class="field-hint">e.g. skills you have, days you're free, or a department not listed above.</span>
-          </div>
-        </div>
-        <label class="consent">
-          <input type="checkbox" required>
-          I confirm the details above are correct and consent to Maria Old Age Home contacting me about volunteering.
-        </label>
-        <div class="form-actions">
-          <button type="submit" class="form-submit">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-            Send via email
-          </button>
-          <button type="button" class="form-submit whatsapp" id="whatsappSend">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.87 9.87 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm5.8 14.02c-.24.68-1.4 1.3-1.93 1.38-.5.08-1.12.11-1.8-.11-.42-.13-.95-.31-1.64-.6-2.88-1.24-4.76-4.14-4.9-4.33-.14-.19-1.17-1.56-1.17-2.98s.73-2.11 1-2.4c.26-.29.57-.36.76-.36.19 0 .38 0 .55.01.18.01.41-.07.64.49.24.58.81 2 .88 2.14.07.14.12.31.02.5-.1.19-.15.31-.3.48-.14.17-.3.37-.43.5-.14.14-.29.29-.13.57.17.29.75 1.24 1.62 2.01 1.11.99 2.05 1.3 2.34 1.44.29.14.46.12.63-.07.17-.19.72-.84.91-1.13.19-.29.38-.24.64-.14.26.1 1.68.79 1.97.94.29.14.48.21.55.33.07.12.07.7-.17 1.38z"/></svg>
-            Send via WhatsApp
-          </button>
-        </div>
-        <p class="form-note">Email opens your mail app with your details ready to send to mariaoldagedhome@gmail.com. WhatsApp opens a chat to 065 545 4917 with your details pre-typed. Prefer to call? Reach us on 017 632 1214 or 071 593 1929.</p>
-        <div class="form-status ok" id="formStatus">Thank you! Your email app should now be open — just hit send and we'll be in touch soon. ♥</div>
-      </form>
+  <div class="form-letterhead">
+    <img src="assets/logo.jpg" alt="Maria Old Age Home logo">
+    <div>Volunteer Application
+      <span>Maria Old Age Home · Evander</span>
     </div>
   </div>
-</section>
+
+  <h2 id="volunteerTitle">Become a volunteer</h2>
+  <p class="modal-intro">Some of our residents' happiest afternoons come from a simple visit — a game of cards, a helping hand in the garden, or just someone new to talk to. Fill in your details below and we'll be in touch. ♥</p>
+
+  <form id="volunteerForm">
+    <div class="form-grid">
+      <div class="field">
+        <label for="v-name">Name <span class="req">*</span></label>
+        <input type="text" id="v-name" name="name" required placeholder="First name">
+      </div>
+      <div class="field">
+        <label for="v-surname">Surname <span class="req">*</span></label>
+        <input type="text" id="v-surname" name="surname" required placeholder="Surname">
+      </div>
+      <div class="field">
+        <label for="v-cell">Cell <span class="req">*</span></label>
+        <input type="tel" id="v-cell" name="cell" required placeholder="071 234 5678">
+      </div>
+      <div class="field full">
+        <label for="v-email">Email <span class="req">*</span></label>
+        <input type="email" id="v-email" name="email" required placeholder="you@example.com">
+      </div>
+      <div class="field">
+        <label for="v-dept">Department of interest <span class="req">*</span></label>
+        <select id="v-dept" name="department" required>
+          <option value="" disabled selected>Choose a department</option>
+          <option>Care & Companionship</option>
+          <option>Kitchen & Meals</option>
+          <option>Garden & Maintenance</option>
+          <option>Activities & Games</option>
+          <option>Admin & Fundraising</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="v-avail">Availability</label>
+        <select id="v-avail" name="availability">
+          <option value="" disabled selected>How often can you help?</option>
+          <option>Once-off event</option>
+          <option>Weekends only</option>
+          <option>Weekly</option>
+          <option>Happy to be flexible</option>
+        </select>
+      </div>
+      <div class="field full">
+        <label for="v-message">Tell us a bit more</label>
+        <textarea id="v-message" name="message" placeholder="Which department would you like to volunteer in, and anything else you'd like us to know..."></textarea>
+        <span class="field-hint">e.g. skills you have, days you're free, or a department not listed above.</span>
+      </div>
+    </div>
+    <label class="consent">
+      <input type="checkbox" required>
+      I confirm the details above are correct and consent to Maria Old Age Home contacting me about volunteering.
+    </label>
+    <div class="form-actions">
+      <button type="submit" class="form-submit">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        Send via email
+      </button>
+      <button type="button" class="form-submit whatsapp" id="whatsappSend">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.87 9.87 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm5.8 14.02c-.24.68-1.4 1.3-1.93 1.38-.5.08-1.12.11-1.8-.11-.42-.13-.95-.31-1.64-.6-2.88-1.24-4.76-4.14-4.9-4.33-.14-.19-1.17-1.56-1.17-2.98s.73-2.11 1-2.4c.26-.29.57-.36.76-.36.19 0 .38 0 .55.01.18.01.41-.07.64.49.24.58.81 2 .88 2.14.07.14.12.31.02.5-.1.19-.15.31-.3.48-.14.17-.3.37-.43.5-.14.14-.29.29-.13.57.17.29.75 1.24 1.62 2.01 1.11.99 2.05 1.3 2.34 1.44.29.14.46.12.63-.07.17-.19.72-.84.91-1.13.19-.29.38-.24.64-.14.26.1 1.68.79 1.97.94.29.14.48.21.55.33.07.12.07.7-.17 1.38z"/></svg>
+        Send via WhatsApp
+      </button>
+    </div>
+    <p class="form-note">Email opens your mail app with your details ready to send to mariaoldagedhome@gmail.com. WhatsApp opens a chat to 065 545 4917 with your details pre-typed. Prefer to call? Reach us on 017 632 1214 or 071 593 1929.</p>
+    <div class="form-status ok" id="formStatus">Thank you! Your email app should now be open — just hit send and we'll be in touch soon. ♥</div>
+  </form>
+</div>
 
 <div class="wrap">
   <div class="path-divider" aria-hidden="true">
@@ -1113,7 +1109,7 @@
         <a href="#daily-life">A Day With Us</a>
         <a href="#friends">Our Friends</a>
         <a href="#services">Care We Give</a>
-        <a href="#volunteer">Volunteer</a>
+        <a href="#" onclick="openVolunteer(); return false;">Volunteer</a>
         <a href="#visit">Visit Us</a>
       </div>
     </div>
@@ -1146,8 +1142,25 @@
     if(drawer.classList.contains('open')){ closeDrawer(); } else { openDrawer(); }
   }
   document.addEventListener('keydown', function(e){
-    if(e.key === 'Escape'){ closeDrawer(); }
+    if(e.key === 'Escape'){ closeDrawer(); closeVolunteer(); }
   });
+
+  // --- Volunteer modal ---
+  var volunteerOverlay = document.getElementById('volunteerOverlay');
+  var volunteerModal = document.getElementById('volunteerModal');
+
+  function openVolunteer(){
+    volunteerOverlay.classList.add('open');
+    volunteerModal.classList.add('open');
+    volunteerModal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeVolunteer(){
+    volunteerOverlay.classList.remove('open');
+    volunteerModal.classList.remove('open');
+    volunteerModal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
 
   // --- Volunteer form: builds a pre-filled email to the home ---
   var volunteerForm = document.getElementById('volunteerForm');
@@ -1158,7 +1171,6 @@
 
     var name = document.getElementById('v-name').value.trim();
     var surname = document.getElementById('v-surname').value.trim();
-    var idnumber = document.getElementById('v-id').value.trim();
     var cell = document.getElementById('v-cell').value.trim();
     var email = document.getElementById('v-email').value.trim();
     var dept = document.getElementById('v-dept').value;
@@ -1169,7 +1181,6 @@
     var body =
       'Name: ' + name + '\n' +
       'Surname: ' + surname + '\n' +
-      'I.D Number: ' + idnumber + '\n' +
       'Cell: ' + cell + '\n' +
       'Email: ' + email + '\n' +
       'Department of interest: ' + dept + '\n' +
@@ -1189,14 +1200,13 @@
   document.getElementById('whatsappSend').addEventListener('click', function(){
     var name = document.getElementById('v-name').value.trim();
     var surname = document.getElementById('v-surname').value.trim();
-    var idnumber = document.getElementById('v-id').value.trim();
     var cell = document.getElementById('v-cell').value.trim();
     var email = document.getElementById('v-email').value.trim();
     var dept = document.getElementById('v-dept').value;
     var avail = document.getElementById('v-avail').value;
     var message = document.getElementById('v-message').value.trim();
 
-    if(!name || !surname || !idnumber || !cell || !email || !dept){
+    if(!name || !surname || !cell || !email || !dept){
       volunteerForm.reportValidity();
       return;
     }
@@ -1205,7 +1215,6 @@
       'Volunteer Application\n' +
       'Name: ' + name + '\n' +
       'Surname: ' + surname + '\n' +
-      'I.D Number: ' + idnumber + '\n' +
       'Cell: ' + cell + '\n' +
       'Email: ' + email + '\n' +
       'Department of interest: ' + dept + '\n' +
